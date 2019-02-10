@@ -3,11 +3,66 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:8fda70c57919d8b3eda9806c43d26ad27efd6049571b838f6351d4c4b9dd5767"
+  name = "github.com/ajstarks/svgo"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "6ce6a3bcf6cde6c5007887677ebd148ec30f42a4"
+
+[[projects]]
+  branch = "master"
+  digest = "1:ec68052c1631168266ba6f8a5fb19bd08f1669ab6aca3c5c3f14a927225a11b3"
+  name = "github.com/golang/freetype"
+  packages = [
+    ".",
+    "raster",
+    "truetype",
+  ]
+  pruneopts = "UT"
+  revision = "e2365dfdc4a05e4b8299a783240d4a7d5a65d4e4"
+
+[[projects]]
+  digest = "1:db23aee6f0ff15fbcd0559d660f91d6b738baeeca46d953396b2fdcec93e1260"
+  name = "github.com/jung-kurt/gofpdf"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "14c1db30737a138f8d9797cffea58783892b2fae"
+  version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:2fe920a41780e19ecb44a5e92d8d4eb850f9ce08d0045f2f9841b25e4c93889b"
+  name = "github.com/llgcode/draw2d"
+  packages = [
+    ".",
+    "draw2dbase",
+    "draw2dimg",
+  ]
+  pruneopts = "UT"
+  revision = "f52c8a71aff06ab8df41843d33ab167b36c971cd"
+
+[[projects]]
+  branch = "master"
   digest = "1:47bcbdf2a60a0bdd142f07f60771078857310fd1ededeb03956add7c7f6bef33"
   name = "golang.org/x/exp"
   packages = ["rand"]
   pruneopts = "UT"
   revision = "c74c464bbbf2425793dda2a0044770271fc009c7"
+
+[[projects]]
+  branch = "master"
+  digest = "1:43569524614b50d3caf82bdf29110fe79e0e5fd0fa5f7ef1d33128f7bca3a20c"
+  name = "golang.org/x/image"
+  packages = [
+    "draw",
+    "font",
+    "math/f64",
+    "math/fixed",
+    "tiff",
+    "tiff/lzw",
+  ]
+  pruneopts = "UT"
+  revision = "ef4a1470e0dc5915f2f5fa04a28eeab72c6936a4"
 
 [[projects]]
   branch = "master"
@@ -46,14 +101,41 @@
   pruneopts = "UT"
   revision = "c07f678f3f6190e0539a39b5e1b0e4536169aea7"
 
+[[projects]]
+  branch = "master"
+  digest = "1:0e478778b0ac45e237e64a372e4156c208224af21da1cc1595dc4a374830cafb"
+  name = "gonum.org/v1/plot"
+  packages = [
+    ".",
+    "palette",
+    "plotter",
+    "plotutil",
+    "tools/bezier",
+    "vg",
+    "vg/draw",
+    "vg/fonts",
+    "vg/vgeps",
+    "vg/vgimg",
+    "vg/vgpdf",
+    "vg/vgsvg",
+  ]
+  pruneopts = "UT"
+  revision = "97beaddfcba22c6477857df8c332241c1f44869c"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
     "golang.org/x/exp/rand",
+    "gonum.org/v1/gonum/floats",
     "gonum.org/v1/gonum/mat",
+    "gonum.org/v1/gonum/stat",
     "gonum.org/v1/gonum/stat/distmv",
     "gonum.org/v1/gonum/stat/distuv",
+    "gonum.org/v1/plot",
+    "gonum.org/v1/plot/plotter",
+    "gonum.org/v1/plot/plotutil",
+    "gonum.org/v1/plot/vg",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -1,0 +1,9 @@
+
+The EM Algorithm is a very clunky one.
+Even when you can get a direct formulation of the expectation step, it does not converge to the true parameters.
+It only guarantees that the log-likelihood will converge to a point of zero gradient. This means that it will
+probably converge to a saddle point (also, could converge to bad local minimum), and thats the case with our generated
+gaussian mixture.
+
+http://faculty.washington.edu/fxia/courses/LING572/EM_collins97.pdf
+Provides some theoretical results on convergence of the EM algorithm.

@@ -49,27 +49,6 @@ func PlotDataset(fileName string, dataset []float64){
 	}
 }
 
-
-func GenerateMixtureGaussians(responsability float64, gaussianData [][]float64) []float64{
-	if responsability < 0 || responsability > 1 {
-		panic("Responsability must be between 0 and 1!")
-	}
-	var ber = distuv.Bernoulli{P:responsability}
-
-	var numObs = len(gaussianData[0])
-	var finalData = make([]float64, numObs)
-	for vec:=0; vec< numObs; vec ++{
-		tmpDraw := ber.Rand()
-		if tmpDraw == 1{
-			finalData[vec] = gaussianData[0][vec]
-		}else{
-			finalData[vec] = gaussianData[1][vec]
-		}
-	}
-	return finalData
-}
-
-
 func EMAlgo(dataset []float64, tol int) ([]float64, float64, float64,float64, float64,float64){
 
 	// Initialize parameters

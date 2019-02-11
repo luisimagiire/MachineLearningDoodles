@@ -7,4 +7,7 @@ the most basic essence of each one.
 
 ROADMAP(?):
  * k-nn [DONE]
- * EM algorithm
+ * EM algorithm [DONE]
+ * Gibbs Sampling
+ * Metropolis Hasting
+ 

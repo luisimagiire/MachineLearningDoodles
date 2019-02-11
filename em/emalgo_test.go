@@ -3,7 +3,7 @@ package em
 import (
 	"fmt"
 	"gonum.org/v1/gonum/mat"
-	"gonum.org/v1/gonum/stat/distuv"
+	"machineLearningBB/simulation"
 	"math/rand"
 
 	"testing"
@@ -23,25 +23,14 @@ func TestGenerateMVGaussian(t *testing.T){
 }
 
 func TestEMAlgo(t *testing.T) {
-	means := []int{-3,3}
+	means := []float64{-3,3}
 	numObs := 1000
 	sigma := 1.5
 	responsability := 0.7
 	maxRounds := 200
-	rand.Seed(int64(1))
+	seed := int64(1)
 
-	var gaussians = make([][]float64, len(means))
-
-	for i := 0; i<len(means); i++{
-		var tmpDist = distuv.Normal{Mu:float64(means[i]), Sigma: sigma}
-		tmpvec := make([]float64, numObs)
-		for j := 0; j<numObs; j++{
-			tmpvec[j] = tmpDist.Rand()
-		}
-		gaussians[i] = tmpvec
-	}
-
-	dataset := GenerateMixtureGaussians(responsability, gaussians)
+	dataset := simulation.GenerateMGDataset(means, sigma, responsability, numObs, seed)
 	PlotDataset("hist.png", dataset)
 
 	run:=0

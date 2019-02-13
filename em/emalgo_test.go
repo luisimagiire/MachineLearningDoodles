@@ -31,7 +31,7 @@ func TestEMAlgo(t *testing.T) {
 	seed := int64(1)
 
 	dataset := simulation.GenerateMGDataset(means, sigma, responsability, numObs, seed)
-	PlotDataset("hist.png", dataset)
+	simulation.PlotDataset("hist.png", dataset)
 
 	run:=0
 	maxRun := 20

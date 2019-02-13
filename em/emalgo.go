@@ -8,9 +8,6 @@ import (
 	"gonum.org/v1/gonum/stat"
 	"gonum.org/v1/gonum/stat/distmv"
 	"gonum.org/v1/gonum/stat/distuv"
-	"gonum.org/v1/plot"
-	"gonum.org/v1/plot/plotter"
-	"gonum.org/v1/plot/vg"
 	"math"
 )
 
@@ -27,26 +24,6 @@ func GenerateMVGaussian(means []float64, sigma *mat.DiagDense, numObs int, seed 
 		}
 
 	return data
-}
-
-func PlotDataset(fileName string, dataset []float64){
-	v := make(plotter.Values, len(dataset))
-	for i, elem := range dataset{
-		v[i] = elem
-	}
-
-	p, err := plot.New()
-	if err != nil {
-		panic(err)
-	}
-	h, err := plotter.NewHist(v, 16)
-	if err != nil {
-		panic(err)
-	}
-	p.Add(h)
-	if err := p.Save(4*vg.Inch, 4*vg.Inch, fileName); err != nil {
-		panic(err)
-	}
 }
 
 func EMAlgo(dataset []float64, tol int) ([]float64, float64, float64,float64, float64,float64){

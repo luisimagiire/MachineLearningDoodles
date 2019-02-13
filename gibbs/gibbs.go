@@ -6,11 +6,10 @@ import (
 	"math/rand"
 )
 
-func Gibbs(dataset []float64, timeSteps int){
+func Gibbs(dataset []float64, timeSteps int) ([]float64,[]float64,[]float64){
 
 	// Initialize parameters
-	//sigmaZero := stat.Variance(dataset, nil)
-	sigmaZero := 1.0  // Lets start we fixed variance parameters and focus on finding the mean
+	sigmaZero := 1.5  // Lets start we fixed variance parameters and focus on finding the mean
 	sigmaOne := sigmaZero
 
 	muZero := dataset[rand.Intn(len(dataset))]
@@ -26,7 +25,7 @@ func Gibbs(dataset []float64, timeSteps int){
 	muZeroEstimates[0] = muZero
 	muOneEstimates[0] = muOne
 
-	for ; round < timeSteps;{
+	for ; round <= timeSteps;{
 
 		// Simulate with fixed normals
 		distOne := distuv.Normal{
@@ -41,43 +40,29 @@ func Gibbs(dataset []float64, timeSteps int){
 
 		tmpPiSample := GroupSampler(dataset, distZero, distOne)
 		piHatEstimates[round] = floats.Sum(tmpPiSample) / float64(len(tmpPiSample))
-		muZeroEstimates[round] = MeanSampler(dataset, piHatEstimates[round-1], 0)
-		muOneEstimates[round] = MeanSampler(dataset, piHatEstimates[round-1], 1)
-
+		muZeroEstimates[round],muOneEstimates[round] = MeanSampler(tmpPiSample, dataset)
+		round++
 	}
-
+	return piHatEstimates, muZeroEstimates, muOneEstimates
 }
 
-func MeanSampler(assignments []float64, dataset []float64, distributionId int) float64{
-	tmpTotalMeanZero := make([]float64, len(dataset))
-	tmpTotalMeanOne := make([]float64, len(dataset))
+func MeanSampler(assignments []float64, dataset []float64) (float64,float64){
 
-	//for i, elem := range dataset{
-	//	if ber.Rand() == 1 && distributionId == 0{
-	//		tmpAssigns[i] = elem
-	//	}else{
-	//		tmpAssigns[i] = elem
-	//	}
-	//}
+	var tmpTotalMeanZero []float64
+	var tmpTotalMeanOne []float64
 
 	for i := range dataset{
-		if assignments[i] == 1{
-			if distributionId == 0{
-				tmpTotalMeanZero[i] = dataset[i]
-			}else{
-				tmpTotalMeanOne[i] = 0
-			}
+		if assignments[i] == 1.0{
+			tmpTotalMeanZero = append(tmpTotalMeanZero, dataset[i])
 		}else{
-			if distributionId == 1{
-				tmpTotalMeanOne[i] = dataset[i]
-			}else{
-				tmpTotalMeanZero[i] = 0
-			}
+			tmpTotalMeanOne = append(tmpTotalMeanOne, dataset[i])
 		}
 	}
 
+	meanZero := floats.Sum(tmpTotalMeanZero) / float64(len(tmpTotalMeanZero))
+	meanOne := floats.Sum(tmpTotalMeanOne) / float64(len(tmpTotalMeanOne))
 
-	return floats.Sum(tmpAssigns) / float64(len(tmpAssigns))
+	return meanZero, meanOne
 }
 
 
